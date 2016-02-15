@@ -3,88 +3,74 @@
 var pigLatin = {
 
 	translate: function(string){
-		var stringArray = string.split(' ');
 
-		var vowelMatch = function(array){
-				return array.map(function(element){
-						return element.charAt(0).match(/[aeiou]/ig) ? true : false;
-				});
-		};
+		var stringArray = string.split(' ');
+		// array of individual arrays
+		// each element is a string split character by character
+		var wordSplit = 
+			stringArray.map(function(element){
+					return element.split('');
+			});
+
+		// RegExp Objects
+			var consonant = new RegExp("^[^aeiou]","i")
+			var vowel = new RegExp("^[aeiou]","i");
+			var sh = new RegExp("^sh","i");
+			var sch = new RegExp("^sch","i");
+			var ch = new RegExp("^ch","i");
+			var squ = new RegExp("^squ","i");
+			var qu = new RegExp("^qu","i");
+			var thr = new RegExp("^thr","i");
+			var th = new RegExp("^th","i");
+
+		var regexArray = [sh,sch,ch,squ,qu,thr,th,consonant];
+
 
 		var shiftRight = function(array,num) {
 			return array.map(function(element,index){
 				return array[(index+num)%array.length];
 			});
 		}
-		// edit to match just qu
-		var quMatch = function(array){
-				return array.map(function(element){
-						if(element.charAt(0).match(/q/ig) && element.charAt(1).match(/u/ig) || 
-							element.charAt(0).match(/[^aeiou]/ig) && element.charAt(1).match(/q/ig) && element.charAt(2).match(/u/ig)){
-								return true;
-						} else {
-								return false;
+
+			var answerArray = [];
+
+			var answerArray = stringArray.map(function(element){
+					for(var i=0;i<regexArray.length;i++){
+						if(element.match(regexArray[i])){
+							return shiftRight(element.split(''),(element.match(regexArray[i]).join('').length));
 						}
-				});
-		};
-		// edit to match consonant + qu
-		var conQuMatch = function(array){
-				return array.map(function(element){
-						if(element.charAt(0).match(/q/ig) && element.charAt(1).match(/u/ig) || 
-							element.charAt(0).match(/[^aeiou]/ig) && element.charAt(1).match(/q/ig) && element.charAt(2).match(/u/ig)){
-								return true;
-						} else {
-								return false;
-						}
-				});
-		};
+					}
+			});
 
-		var thMatch = function(array){
-				return array.map(function(element){
-						if(element.charAt(0).match(/t/ig) && element.charAt(1).match(/h/ig) || 
-							element.charAt(0).match(/t/ig) && element.charAt(1).match(/h/ig) && element.charAt(2).match(/[^aeiou]/ig)){
-								return true;
-						} else {
-								return false;
-						}
-				});
-		};
+			answerArray.map(function(element){
+				element.push('ay');
+				// element.push('y');
+			});
 
-		var chMatch = function(array){
-				return array.map(function(element){
-						if(element.charAt(0).match(/c/ig) && element.charAt(1).match(/h/ig) || 
-							element.charAt(0).match(/s/ig) && element.charAt(1).match(/c/ig) && element.charAt(2).match(/h/ig)){
-								return true;
-						} else {
-								return false;
-						}
-				});
-		};
+			var tom = answerArray.map(function(element){
+					return element.join('');
+			});
 
-		// SHIFT RIGHT FUNCTION (num is how many letters you want chop off
-		// the beginning of the array and add to the end)
-			// function shiftRight (array,num) {
-			// 	return array.map(function(element,index){
-			// 		return array[(index+num)%array.length];
-			// 	});
-			// }
+			var answer = tom.reduce(function(accum, curr){
+					return accum + " " + curr;
+			});
 
-	// is consonantMatch necessary???
-		// var consonantMatch = function(array){
-		// 		return array.map(function(element){
-		// 				return element.charAt(0).match(/[^aeiou]/ig) ? true : false;
-		// 		});
-		// };
+			// answerArray.map(function(element){
+			// 		return element.join('');
+			// })
+			// answerArray.reduce(function(accum,curr){return accum.concat(curr).join('')});
 
-			// for(var i=0; i<stringArray.length; i++){
-			// 		if(vowelMatch(stringArray[i])){
-			// 			// do something
-			// 		} else if(quMatch(stringArray[i])){
-			// 			// do something
-			// 		} else if (quMatch(stringArray[i]))
-			// }
+			// stringArray.map(function(element){
+			// 		for(var i=0;i<regexArray.length;i++){
+			// 			if(element.match(regexArray[i])){
+			// 				answerArray.push(element.replace(regexArray[i],''));
+			// 			}
+			// 		}
+			// })
 
-			return chMatch(stringArray);
+
+			return answer;
+		
 	}
 
 };
