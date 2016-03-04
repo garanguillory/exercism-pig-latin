@@ -9,14 +9,14 @@ var pigLatin = {
 	translate: function(input){
 		var array = input.split(' ');
 		var answer = [];
-		for(var i=0; i<array.length; i++){
+		for(var i=array.length-1; i>=0; i--){
 			if(array[i].match(/^[aeiou]/i)){
-				answer.push(array[i]+'ay');
+				answer.unshift(array[i]+'ay');
 			} else if(array[i].match(/(^sch|^squ|^thr|^sh|^ch|^qu|^th)/i)) {
 				var number = array[i].match(/(^sch|^squ|^thr|^sh|^ch|^qu|^th)/i)[0].length;
-				answer.push(this.swap(array[i],number));
+				answer.unshift(this.swap(array[i],number));
 			} else {
-				answer.push(this.swap(array[i],1));
+				answer.unshift(this.swap(array[i],1));
 			}
 		}
 		return answer.join(' ');
@@ -26,6 +26,10 @@ var pigLatin = {
 
 
 module.exports = pigLatin;
+
+
+
+
 
 
 
