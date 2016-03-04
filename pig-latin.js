@@ -34,6 +34,8 @@ var pigLatin = {
 
 			var answerArray = [];
 
+	// what to do with vowels
+
 			var answerArray = stringArray.map(function(element){
 					for(var i=0;i<regexArray.length;i++){
 						if(element.match(regexArray[i])){

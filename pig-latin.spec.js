@@ -1,4 +1,4 @@
-var pigLatin = require('./pig-latin');
+var pigLatin = require('./latin-pig');
 
 describe('pigLatin', function () {
 
