@@ -1,12 +1,5 @@
 var pigLatin = {
 
-	vowelmatch: function(word){
-		var wordArray = String(word).split('');
-			if(wordArray[0].match(/^[aeiou]/i)){
-				return true;
-			}
-	},
-
 	swap: function(word,number){
 		var shift = word.slice(0,number)
 		var last = word.slice(number,word.length);
@@ -17,7 +10,7 @@ var pigLatin = {
 		var array = input.split(' ');
 		var answer = [];
 		for(var i=0; i<array.length; i++){
-			if(this.vowelmatch(array[i])){
+			if(array[i].match(/^[aeiou]/i)){
 				answer.push(array[i]+'ay');
 			} else if(array[i].match(/(^sch|^squ|^thr|^sh|^ch|^qu|^th)/i)) {
 				var number = array[i].match(/(^sch|^squ|^thr|^sh|^ch|^qu|^th)/i)[0].length;
@@ -33,3 +26,8 @@ var pigLatin = {
 
 
 module.exports = pigLatin;
+
+
+
+
+
