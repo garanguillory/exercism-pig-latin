@@ -26,12 +26,3 @@ var pigLatin = {
 
 
 module.exports = pigLatin;
-
-
-
-
-
-
-
-
-
