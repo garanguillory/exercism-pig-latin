@@ -19,10 +19,9 @@ var pigLatin = {
 		for(var i=0; i<array.length; i++){
 			if(this.vowelmatch(array[i])){
 				answer.push(array[i]+'ay');
-			} else if(array[i].match(/(^sch|^squ|^thr)/i)) {
-				answer.push(this.swap(array[i],3));
-			} else if(array[i].match(/(^sh|^ch|^qu|^th)/i)) {
-				answer.push(this.swap(array[i],2));
+			} else if(array[i].match(/(^sch|^squ|^thr|^sh|^ch|^qu|^th)/i)) {
+				var number = array[i].match(/(^sch|^squ|^thr|^sh|^ch|^qu|^th)/i)[0].length;
+				answer.push(this.swap(array[i],number));
 			} else {
 				answer.push(this.swap(array[i],1));
 			}
